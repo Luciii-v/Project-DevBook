@@ -29,7 +29,9 @@ function analyzeCode(input: string) {
     setAiInsight(""); // Clear previous insight so the loading state looks clean
 
     try {
-      const response = await fetch(`http://localhost:8000/query?user_question=${encodeURIComponent(codeContent)}&mode=${mode}`, {
+      // DYNAMIC API URL SETUP FOR DEPLOYMENT
+      const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+      const response = await fetch(`${API_BASE_URL}/query?user_question=${encodeURIComponent(codeContent)}&mode=${mode}`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json'
